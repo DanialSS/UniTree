@@ -133,7 +133,7 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # redirect to index
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'post-list'
 
 # required email when registering a user
 ACCOUNT_EMAIL_REQUIRED = True

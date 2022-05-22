@@ -17,7 +17,15 @@
     <nav>
         <div class="nav-left">
             <img src="{% static 'images/logo.png' %}" class="logo">
-            <a class="navbar-brand" href="{% url 'index' %}" style="position: relative; color: white; font-size: 25px; text-decoration: none; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">UniTree</a>
+            <a class="navbar-brand"
+
+               {% if user.is_authenticated %}
+               href="{% url 'post-list' %}"
+               {% else %}
+               href="{% url 'index' %}"
+               {% endif %}
+
+               style="position: relative; color: white; font-size: 25px; text-decoration: none; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">UniTree</a>
         </div>
         <div class="nav-right">
             <div class="search-box">
@@ -32,11 +40,11 @@
             <div class="nav-item dropdown">
                 <button role="button" type="button" class="btn" data-toggle="dropdown" style="margin-left: 10px">
                     <i class="fas fa-user" style="color: white; font-size: 22px"></i>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Sign Out</a></li>
-                    </ul>
                 </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'account_logout' %}">Sign Out</a></li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -73,9 +81,10 @@
             <div class="post-container">
                 {% for post in post_list %}
                 <div>
-                    <div>
+                    <div class="position-relative">
                         <p><strong>{{ post.author }}</strong> {{ post.created_on }}</p>
                         <p>{{ post.body }}</p>
+                        <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
                     </div>
                 </div>
                 {% endfor %}
