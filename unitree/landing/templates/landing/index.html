@@ -1,0 +1,23 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <section style="background-image: url({% static 'images/background-firstpage.png' %})">
+        <header>
+            <h2><a href="#" class="logo">UNITREE</a></h2>
+            <div class="navigation">
+                <a href="{% url 'account_login' %}">LOGIN</a>
+                <a href="{% url 'account_signup' %}">REGISTER</a>
+            </div>
+        </header>
+        <div class="content">
+            <div class="info">
+                <h2>Welcome to UniTree!</h2>
+                <p>Connect with your friends and make your university life easier ;)</p>
+                <a href="{% url 'account_signup' %}" class="info-btn">Start now!</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
