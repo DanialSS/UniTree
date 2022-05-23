@@ -49,31 +49,28 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="left-sidebar">
-            <div class="mt-4">
-              <a href="{% url 'post-detail' object.pk %}" class="btn btn-secondary">Go Back</a>
+    {% load crispy_forms_tags %}
+
+    <div class="row mt-4">
+        <div class="d-grid gap-2 col-3 justify-content-md-end">
+            <div>
+              <a href="{% url 'profile' object.pk %}" class="btn btn-secondary">Go Back</a>
             </div>
         </div>
-
-        <div class="main-content">
-            <div class="write-post-container">
-                <div>
-                    <div>
-                        <form method="POST">
-                            {% csrf_token %}
-                            <h5>Are you sure?</h5>
-                            <p>You are removing your post, this action cannot be undone.</p>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button class="btn btn-danger mt-3">Delete</button>
-                            </div>
-                        </form>
-                    </div>
+        <div class="d-grid col-6">
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success mt-3">Save changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <div class="right-sidebar"></div>
     </div>
 
     {% endblock content %}
