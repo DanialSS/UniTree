@@ -96,21 +96,36 @@
                 {% if profile.bio %}
                 <p>{{ profile.bio }}</p>
                 {% endif %}
+
+                <p>Followers: {{ number_of_followers }}</p>
+                {% if user == request.user %}
+                {% else %}
+                {% if is_following %}
+                <form method="POST" action="{% url 'remove-follower' profile.pk%}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger" type="submit">Unfollow</button>
+                </form>
+                {% else %}
+                <form method="POST" action="{% url 'add-follower' profile.pk %}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-success" type="submit">Follow</button>
+                </form>
+                {% endif %}
+                {% endif %}
             </div>
 
              <div class="post-container">
-                {% for post in post_list %}
-                <div>
-                    <div class="position-relative">
-                        <p><strong>{{ post.author }}</strong> {{ post.created_on }}</p>
-                        <p>{{ post.body }}</p>
-                        <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+                {% for post in posts %}
+                 <div>
+                     <p><a style="text-decoration: none; color: #626262; font-weight: bold" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}</p>
+                     <div class="position-relative">
+                         <p>{{ post.body }}</p>
+                         <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+                     </div>
+                 </div>
+                 {% endfor %}
+             </div>
         </div>
-
         <div class="right-sidebar mt-3">
         <div class="sidebar-title">
           <h4>Events</h4>
