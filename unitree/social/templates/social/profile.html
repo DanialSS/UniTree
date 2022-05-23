@@ -101,11 +101,10 @@
                 <p>{{ profile.bio }}</p>
                 {% endif %}
 
-                <p>Followers: {{ number_of_followers }}</p>
-                {% if user == request.user %}
+                <a href="{% url 'list-followers' profile.pk %}" class="post-link">Followers: {{ number_of_followers }}</a>                {% if user == request.user %}
                 {% else %}
                 {% if is_following %}
-                <form method="POST" action="{% url 'remove-follower' profile.pk%}">
+                <form method="POST" action="{% url 'remove-follower' profile.pk %}">
                     {% csrf_token %}
                     <button class="btn btn-outline-danger" type="submit">Unfollow</button>
                 </form>

@@ -86,7 +86,8 @@
             <div class="post-container">
                 {% for post in post_list %}
                 <div>
-                     <p><a style="text-decoration: none; color: #626262; font-weight: bold" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}</p>
+                    <p><a style="text-decoration: none; color: #626262; font-weight: bold" href="{% url 'profile' post.author.profile.pk %}">
+                            @{{ post.author }}</a> {{ post.created_on }}</p>
                     <div class="position-relative">
                         <p>{{ post.body }}</p>
                         <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
