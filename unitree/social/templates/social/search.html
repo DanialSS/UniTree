@@ -29,12 +29,11 @@
         </div>
         <div class="nav-right">
             <div class="search-box">
-                <form class="d-flex w-100" method="GET" action="{% url 'profile-search' %}">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="query" value="{{ request.GET.query }}">
-                        <button style="border: none; background-color: transparent; box-shadow: none" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"
+                name="query" value="{{ request.GET.query }}">
+                <button style="border: none; background-color: transparent; box-shadow: none" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
             <div>
                 <button role="button" type="button" class="btn" style="margin-left: 10px">
@@ -53,28 +52,28 @@
         </div>
     </nav>
 
-    {% load crispy_forms_tags %}
+    <div class="container">
+        <div class="left-sidebar">
+            <div class="mt-4">
+              <a href="{% url 'post-list' %}" class="btn btn-secondary">Go Back</a>
+            </div>
+        </div>
 
-    <div class="row mt-4">
-        <div class="d-grid gap-2 col-3 justify-content-md-end">
-            <div>
-              <a href="{% url 'profile' object.pk %}" class="btn btn-secondary">Go Back</a>
+        <div class="main-content">
+            <div class="post-container">
+
+            {% for profile in profile_list %}
+            <div class="border-bottom mb-3">
+            <p><a style="text-decoration: none; color: #626262; font-weight: 600"  href="{% url 'profile' profile.pk %}">@{{ profile.user }}</a></p>
+                {% if profile.location %}
+                    <p>{{ profile.location }}</p>
+                {% endif %}
+                <p>Followers: {{ profile.followers.all.count }}</p>
+            </div>
+            {% endfor %}
             </div>
         </div>
-        <div class="d-grid col-6">
-            <div class="card mb-4">
-                <div class="card-header">Account Details</div>
-                <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form | crispy }}
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-success mt-3">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <div class="right-sidebar" style="background-color: #EFEFEF"></div>
     </div>
 
     {% endblock content %}
