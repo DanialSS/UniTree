@@ -11,37 +11,22 @@
 {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style7.css' %}">
 
-
-
-<div class="container">
+    <div class="container">
 		<div class="img">
 			<img src="{% static '/images/1.png' %}">
 		</div>
 		<div class="login-content">
-			<form action="index.html">
+			<form class="login" method="POST" action="{% url 'account_login' %}">
 				<img src="{% static '/images/logo_green.png' %}">
 				<h2 class="title">Welcome to Unitree!</h2>
-           		<div class="input-div one">
-           		   <div class="i">
-           		   		<i class="fas fa-user"></i>
-           		   </div>
-           		   <div class="div">
-           		   		<h5>Username</h5>
-           		   		<input type="text" class="input">
-           		   </div>
-           		</div>
-           		<div class="input-div pass">
-           		   <div class="i">
-           		    	<i class="fas fa-lock"></i>
-           		   </div>
-           		   <div class="div">
-           		    	<h5>Password</h5>
-           		    	<input type="password" class="input">
-            	   </div>
-            	</div>
-              <br>
-            	<a href="{% url 'account_signup' %}">Don't have an account?</a>
-            	<input type="submit" class="btn" value="Login">
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <br>
+                <a href="{% url 'account_signup' %}">Don't have an account?</a>
+                <input type="submit" class="btn" value="Login">
             </form>
         </div>
     </div>
