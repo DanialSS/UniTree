@@ -60,10 +60,8 @@
         <div class="left-sidebar">
             <div class="imp-links">
                 <br>
-                <a href="#"> <img src="{% static 'images/news.png' %}" alt="">News</a>
-                <a href="#"> <img src="{% static 'images/friends.png' %}" alt=""> Friends</a>
-                <a href="#"> <img src="{% static 'images/group.png' %}" alt=""> Group</a>
-                <a href="#"> <img src="{% static 'images/help.png' %}" alt=""> Help </a>
+                <a href="{% url 'post-list' %}" alt="">News</a>
+                <a href="{% url 'faq' %}" alt="">FAQ</a>
             </div>
         </div>
 
